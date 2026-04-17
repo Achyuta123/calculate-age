@@ -16,9 +16,9 @@
 4. [SCA — Settings & Configuration](#4-sca--settings--configuration)
    - 4.1 [Configure SCA (Trivy) Scan Settings](#41-configure-sca-trivy-scan-settings)
    - 4.2 [Configure SCA Context Modifiers](#42-configure-sca-context-modifiers)
-5. [Running a DAST Scan](#5-running-a-dast-scan)
-6. [Running an SCA Scan](#6-running-an-sca-scan)
-7. [Saving Your Configuration](#7-saving-your-configuration)
+5. [Saving Your Configuration](#5-saving-your-configuration)
+6. [Running a DAST Scan](#6-running-a-dast-scan)
+7. [Running an SCA Scan](#7-running-an-sca-scan)
 8. [Quick Reference — Navigation Commands](#8-quick-reference--navigation-commands)
 
 ---
@@ -353,7 +353,24 @@ All context settings are stored in `context_modifiers/enhanced_compliance.json`.
 
 ---
 
-## 5. Running a DAST Scan
+## 5. Saving Your Configuration
+
+After configuring DAST and/or SCA settings, always save before running a scan so your settings persist across sessions.
+
+**Path:** Main Menu → `1` Settings & Configuration → `5` Save Configuration to .env
+
+```
+💾 Saving Configuration...
+✅ Configuration saved to .env file
+```
+
+The `.env` file is saved in the `CazeAppSecReport` directory and is loaded automatically on the next launch. It stores all settings including DAST URLs, Trivy target, ZAP report path, and context modifiers.
+
+
+
+---
+
+## 6. Running a DAST Scan
 
 **Path:** Main Menu → `2` Security Analysis → `2` DAST Analysis (Dynamic Analysis)
 
@@ -516,22 +533,7 @@ Enter `y` to open the folder in Windows Explorer.
 
 ---
 
-## 7. Saving Your Configuration
-
-After configuring DAST and SCA settings, save them so they persist across sessions.
-
-**Path:** Main Menu → `1` Settings & Configuration → `5` Save Configuration to .env
-
-```
-💾 Saving Configuration...
-✅ Configuration saved to .env file
-```
-
-The `.env` file is saved in the `CazeAppSecReport` directory and is loaded automatically on the next launch. It stores all settings including DAST URLs, Trivy target, ZAP report path, and context modifiers.
-
----
-
-## 8. Quick Reference — Navigation Commands
+## 7. Quick Reference — Navigation Commands
 
 | Where you want to go | Command |
 |---|---|
@@ -546,10 +548,10 @@ The `.env` file is saved in the `CazeAppSecReport` directory and is loaded autom
 
 **Full workflow — DAST setup and scan:**
 ```
-Main Menu → 1 → 2 → 1 (set URL) → 5 (test connection) → 0 → 0 → 2 → 2
+Main Menu → 1 → 2 → 1 (set URL) → 5 (test connection) → 0 → 5 (save) → 0 → 2 → 2
 ```
 
 **Full workflow — SCA setup and scan:**
 ```
-Main Menu → 1 → 3 → 1 (set target) → 2 (set context) → 0 → 0 → 2 → 3
+Main Menu → 1 → 3 → 1 (set target) → 2 (set context) → 0 → 5 (save) → 0 → 2 → 3
 ```
