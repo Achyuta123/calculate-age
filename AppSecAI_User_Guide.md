@@ -172,13 +172,13 @@ AppSecAI uses a `cd`-style navigation system. At any prompt you can type a `cd` 
 The breadcrumb shown at every screen looks exactly like this (path is the folder where the EXE lives):
 
 ```
-C:\Users\You\Desktop\CazeAppSecReport> Main Menu
+F:\Iss-56\caze-code-sec-ai> Main Menu
 ```
 
 As you navigate deeper it grows:
 
 ```
-C:\Users\You\Desktop\CazeAppSecReport> Main Menu > Settings Menu > SonarQube Settings
+F:\Iss-56\caze-code-sec-ai> Main Menu > Settings Menu > SonarQube Settings
 ```
 
 **Navigation commands:**
@@ -305,7 +305,7 @@ Select mode (1-4) [Default: 1]:
 4. Launch `python -m cli`, press **Enter** (or type `1`) → the app loads your config and goes to the main menu:
 
 ```
-C:\...\CazeAppSecReport> Main Menu
+F:\Iss-56\caze-code-sec-ai> Main Menu
 
 ┌─────────────────────────────────────────────────────────────┐
 │                         MAIN MENU                           │
@@ -338,7 +338,7 @@ Active Configuration:
 The **Advanced CLI Configuration Wizard** opens:
 
 ```
-C:\...\CazeAppSecReport> Main Menu > Advanced Setup Wizard
+F:\Iss-56\caze-code-sec-ai> Main Menu > Advanced Setup Wizard
 
 ┌─────────────────────────────────────────────────────────────┐
 │             ADVANCED CLI CONFIGURATION WIZARD               │
@@ -356,7 +356,7 @@ C:\...\CazeAppSecReport> Main Menu > Advanced Setup Wizard
 2. Select `1` to configure SAST. The SAST Config sub-wizard opens:
 
 ```
-C:\...\CazeAppSecReport> Main Menu > Advanced Setup Wizard > SAST Config
+F:\Iss-56\caze-code-sec-ai> Main Menu > Advanced Setup Wizard > SAST Config
 
   1. Basic Config (GitHub Repo, Token, SonarQube)
   2. Context Modifiers (Deployment, Settings)
@@ -371,7 +371,7 @@ C:\...\CazeAppSecReport> Main Menu > Advanced Setup Wizard > SAST Config
 The scan menu appears:
 
 ```
-C:\...\CazeAppSecReport> Main Menu
+F:\Iss-56\caze-code-sec-ai> Main Menu
 
 ┌─────────────────────────────────────────────────────────────┐
 │                    SECURITY ANALYSIS                        │
@@ -399,7 +399,7 @@ cd settings
 The Settings Menu appears:
 
 ```
-C:\...\CazeAppSecReport> Main Menu > Settings Menu
+F:\Iss-56\caze-code-sec-ai> Main Menu > Settings Menu
 
 ┌─────────────────────────────────────────────────────────────┐
 │                    SETTINGS MENU                            │
@@ -408,7 +408,6 @@ C:\...\CazeAppSecReport> Main Menu > Settings Menu
 │  2.  DAST Configurations                                    │
 │  3.  SCA  Configurations                                    │
 │  4.  General Application Settings                           │
-│  5.  Save Configuration to .env                             │
 │  0.  Back to Main Menu                                      │
 └─────────────────────────────────────────────────────────────┘
 
@@ -418,13 +417,15 @@ Current Settings:
   DAST Target:        Not Set
   LLM Model:          WhiteRabbitNeo/Llama-3.1-WhiteRabbitNeo-2-8B:latest
 
-👉 Select option (0-5) or command (cd <menu>, cd/, cd ..):
+👉 Select option (0-4) or command (cd <menu>, cd/, cd ..):
 ```
+
+> All settings are **auto-saved immediately** when you enter them — no separate save step is needed.
 
 Select `1` or type `cd sast`. The SAST Configuration menu opens:
 
 ```
-C:\...\CazeAppSecReport> Main Menu > Settings Menu > SAST Configuration
+F:\Iss-56\caze-code-sec-ai> Main Menu > Settings Menu > SAST Configuration
 
 ┌─────────────────────────────────────────────────────────────┐
 │                [SAST] STATIC ANALYSIS SETTINGS              │
@@ -441,7 +442,7 @@ C:\...\CazeAppSecReport> Main Menu > Settings Menu > SAST Configuration
 Select `3` or type `cd sonar` to open SonarQube Settings:
 
 ```
-C:\...\CazeAppSecReport> Main Menu > Settings Menu > SAST Configuration > SonarQube Settings
+F:\Iss-56\caze-code-sec-ai> Main Menu > Settings Menu > SAST Configuration > SonarQube Settings
 
 ┌─────────────────────────────────────────────────────────────┐
 │                    SONARQUBE SETTINGS                       │
@@ -491,7 +492,7 @@ Enter GitHub token (input hidden):
 From Settings Menu, select `4` (General Application Settings) or type `cd threshold`:
 
 ```
-C:\...\CazeAppSecReport> Main Menu > Settings Menu > General Settings
+F:\Iss-56\caze-code-sec-ai> Main Menu > Settings Menu > General Settings
 
 ┌─────────────────────────────────────────────────────────────┐
 │                  GENERAL APPLICATION SETTINGS               │
@@ -1001,7 +1002,7 @@ cd settings
 Then select `3` or type `cd sca`. The SCA Configuration menu opens:
 
 ```
-C:\...\CazeAppSecReport> Main Menu > Settings Menu > SCA Configuration
+F:\Iss-56\caze-code-sec-ai> Main Menu > Settings Menu > SCA Configuration
 
 ┌─────────────────────────────────────────────────────────────┐
 │             [SCA] SOFTWARE COMPOSITION SETTINGS             │
@@ -1064,7 +1065,7 @@ cd sca context
 The SCA Context Settings menu opens:
 
 ```
-C:\...\CazeAppSecReport> Main Menu > Settings Menu > SCA Context Settings
+F:\Iss-56\caze-code-sec-ai> Main Menu > Settings Menu > SCA Context Settings
 
 ┌──────────────────────────────────────────────────────────────────────┐
 │                  CONFIGURE SCA CONTEXT SETTINGS                      │
