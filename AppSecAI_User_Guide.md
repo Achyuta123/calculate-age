@@ -63,7 +63,7 @@ Select mode (1-4) [Default: 1]:
 All settings are read from `appsec_config.json` in the same folder as the executable. Edit the file once, press Enter, and run scans immediately. Best for repeatable or automated workflows.
 
 **Mode 2 — Interactive CLI**
-A menu-driven wizard walks you through every setting interactively. Settings can be saved to `.env` for future sessions. Best for first-time setup or ad-hoc scans.
+A menu-driven wizard walks you through every setting interactively. Every change is **auto-saved to `.env` immediately** — no manual save step needed. Best for first-time setup or ad-hoc scans.
 
 ---
 
@@ -155,7 +155,7 @@ If SonarQube is not reachable, AppSecAI falls back to a **mock SAST analysis** a
 
 | Requirement | Details |
 |---|---|
-| python -m cli | In a writable folder on your machine |
+| AppSecAI application | In a writable folder on your machine |
 | GitHub repository | Public or private repo to scan |
 | GitHub Personal Access Token | Required to clone repos and create PRs |
 | SonarQube instance | Local or remote — see Section 2.5 |
@@ -649,7 +649,7 @@ target URL. You only need to provide the URL of the running application.
 
 | Requirement | Details |
 |---|---|
-| python -m cli | In a writable folder on your machine |
+| AppSecAI application | In a writable folder on your machine |
 | Running web application | Accessible via a URL (http or https) |
 | Target URL | Full URL of the app to scan (e.g. `https://app.example.com`) |
 
@@ -657,10 +657,10 @@ target URL. You only need to provide the URL of the running application.
 
 ### 3.2 Navigation Basics
 
-The breadcrumb displayed when navigating to DAST settings:
+The breadcrumb displayed when navigating to DAST settings looks like this (path reflects your actual working directory):
 
 ```
-C:\...\CazeAppSecReport> Main Menu > Settings Menu > DAST Configuration
+F:\Iss-56\caze-code-sec-ai> Main Menu > Settings Menu > DAST Configuration
 ```
 
 **Navigation shortcuts for DAST:**
@@ -698,15 +698,15 @@ To upload an existing ZAP HTML report instead of running a live scan, also set:
 }
 ```
 
-Save the file, launch `python -m cli`, press Enter (Mode 1).
+Save the file, launch the application, press Enter (Mode 1).
 
 #### Mode 2 — Interactive CLI
 
-1. Launch `python -m cli`, select Mode 2, complete the initial wizard
+1. Launch the application, select Mode 2, complete the initial wizard
 2. From the Advanced CLI Configuration Wizard select `2. DAST Configuration`:
 
 ```
-C:\...\CazeAppSecReport> Main Menu > Advanced Setup Wizard > DAST Config
+F:\Iss-56\caze-code-sec-ai> Main Menu > Advanced Setup Wizard > DAST Config
 
   1. Basic Config (ZAP Target)
   2. Context Modifiers (Deployment, Settings)
@@ -715,16 +715,57 @@ C:\...\CazeAppSecReport> Main Menu > Advanced Setup Wizard > DAST Config
 👉 Select option (0-2):
 ```
 
-3. Select `1` — this opens the DAST Configuration menu (same as via Settings Menu)
+3. Select `1` — this opens the DAST Configuration menu:
+
+```
+F:\Iss-56\caze-code-sec-ai> Main Menu > Advanced Setup Wizard > DAST Config > DAST Configuration
+
+┌─────────────────────────────────────────────────────────────┐
+│               [DAST] DYNAMIC ANALYSIS SETTINGS              │
+├─────────────────────────────────────────────────────────────┤
+│  1.  Configure DAST Target URL(s)                           │
+│  2.  Configure ZAP Scanner Settings                         │
+│  3.  Configure ZAP Report Path (Upload)                     │
+│  0.  Back to Settings Menu                                  │
+└─────────────────────────────────────────────────────────────┘
+
+👉 Select option (0-3):
+```
+
+4. Select `0` to go back, then select `2` for Context Modifiers (Deployment Settings):
+
+```
+F:\Iss-56\caze-code-sec-ai> Main Menu > Advanced Setup Wizard > DAST Config > Deployment Settings
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                  CONFIGURE DEPLOYMENT SETTINGS                       │
+├──────────────────────────────────────────────────────────────────────┤
+│  Options (type command or use cd):                                   │
+│                                                                      │
+│  1. product and version  - App name & version                        │
+│     (cd product)                                                     │
+│  2. environment          - Deployment type, General compliance       │
+│     (cd env)                                                         │
+│  3. runtime              - Container, monitoring & resource limits   │
+│     (cd runtime)                                                     │
+│  4. service              - Service auth & rate limiting              │
+│     (cd service)                                                     │
+│  5. security controls    - Security features (RBAC, WAF, MFA, etc.) │
+│     (cd security, cd controls)                                       │
+│  0. back or cd/..        - Return to Settings Menu                   │
+└──────────────────────────────────────────────────────────────────────┘
+
+👉 Select option (0-6), command, or cd navigation:
+```
 
 **Navigating to DAST settings from the main menu at any time:**
 
 Type `cd settings` then `cd dast`, or directly `cd dast` from anywhere.
 
-The DAST Configuration menu:
+The DAST Configuration menu when accessed from Settings Menu:
 
 ```
-C:\...\CazeAppSecReport> Main Menu > Settings Menu > DAST Configuration
+F:\Iss-56\caze-code-sec-ai> Main Menu > Settings Menu > DAST Configuration
 
 ┌─────────────────────────────────────────────────────────────┐
 │               [DAST] DYNAMIC ANALYSIS SETTINGS              │
@@ -804,31 +845,13 @@ Changes to `appsec_config.json` are saved when you save the file. The app reads 
 
 #### In Interactive CLI Mode
 
-Settings entered interactively are stored as environment variables for the current session.
-To persist them for future sessions, from the Settings Menu select **5. Save Configuration to .env**:
-
-```
-C:\...\CazeAppSecReport> Main Menu > Settings Menu
-
-┌─────────────────────────────────────────────────────────────┐
-│                    SETTINGS MENU                            │
-├─────────────────────────────────────────────────────────────┤
-│  1.  SAST Configurations                                    │
-│  2.  DAST Configurations                                    │
-│  3.  SCA  Configurations                                    │
-│  4.  General Application Settings                           │
-│  5.  Save Configuration to .env                             │
-│  0.  Back to Main Menu                                      │
-└─────────────────────────────────────────────────────────────┘
-```
-
-Select `5`. The `.env` file is written next to `python -m cli` and loaded automatically on next launch.
+Every setting you change in the interactive menus is **auto-saved to `.env` immediately** — there is no separate save step. As soon as you confirm a value (e.g. enter a URL, token, or project key), it is written to the `.env` file in the application folder and will be loaded automatically on the next launch.
 
 **Configuration priority (highest to lowest):**
 
 1. Active environment variables (current session / CLI flags)
 2. `appsec_config.json` (manual file edits)
-3. `.env` file (saved wizard session)
+3. `.env` file (auto-saved interactive settings)
 4. `app_config.yaml` (system defaults)
 
 ---
@@ -943,7 +966,7 @@ SCA (Software Composition Analysis) identifies known vulnerabilities in third-pa
 
 | Requirement | Details |
 |---|---|
-| python -m cli | In a writable folder |
+| AppSecAI application | In a writable folder |
 | Project to scan | Local directory, container image, or repository |
 | Internet access | For Trivy to download vulnerability databases |
 
@@ -1024,7 +1047,7 @@ Examples:
 - For container image: `python:3.9` or `nginx:latest`
 - For GitHub repo: `https://github.com/username/repo` or `username/repo`
 
-The settings are saved to environment variables and `.env` file.
+The settings are auto-saved to the `.env` file immediately upon confirmation.
 
 #### Step 2: Configure SCA Context (Optional but Recommended)
 
@@ -1118,9 +1141,7 @@ All changes to `appsec_config.json` are saved when you save the file. The app re
 
 #### In Interactive CLI Mode
 
-Settings entered interactively are stored as environment variables for the current session. To persist them:
-
-From the Settings Menu, select `5` (Save Configuration to .env). The `.env` file is created next to `python -m cli` and loaded automatically on next launch.
+Every setting you change in the interactive menus is **auto-saved to `.env` immediately**. There is no separate save step. As soon as you confirm a value, it is written to the `.env` file in the application folder and loaded automatically on the next launch.
 
 Alternatively, manually edit `appsec_config.json` to persist SCA context settings. The JSON config takes priority over the `.env` file.
 
