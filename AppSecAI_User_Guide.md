@@ -39,7 +39,7 @@
 
 ## 1. General Overview & CLI Features
 
-AppSecAI is an AI-powered security scanning platform delivered as a standalone executable (`AppSecAI.exe`). It bundles SAST (via SonarQube), DAST (via OWASP ZAP — built-in, no installation required), and SCA (via Trivy — built-in, no installation required) into a single tool, with AI-driven vulnerability remediation and automated GitHub pull request creation.
+AppSecAI is an AI-powered security scanning platform delivered as a standalone executable (`python -m cli`). It bundles SAST (via SonarQube), DAST (via OWASP ZAP — built-in, no installation required), and SCA (via Trivy — built-in, no installation required) into a single tool, with AI-driven vulnerability remediation and automated GitHub pull request creation.
 
 ### Two Modes of Operation
 
@@ -75,20 +75,20 @@ Type `3` at the startup menu and press Enter to view the built-in help guide.
 
 #### From the Terminal
 
-AppSecAI also exposes a full command-line interface. Run from a terminal in the folder containing `AppSecAI.exe`:
+AppSecAI also exposes a full command-line interface. Run from a terminal in the folder containing `python -m cli`:
 
 **Top-level help:**
 ```
-AppSecAI.exe --help
+python -m cli --help
 ```
 
 **Command-specific help:**
 ```
-AppSecAI.exe scan --help
-AppSecAI.exe fix --help
-AppSecAI.exe report --help
-AppSecAI.exe config --help
-AppSecAI.exe sca --help
+python -m cli scan --help
+python -m cli fix --help
+python -m cli report --help
+python -m cli config --help
+python -m cli sca --help
 ```
 
 **Global flags (available on every command):**
@@ -115,17 +115,17 @@ AppSecAI.exe sca --help
 **Example commands:**
 
 ```
-AppSecAI.exe scan --type sast --target https://github.com/user/repo.git
-AppSecAI.exe scan --type dast --target https://example.com
-AppSecAI.exe scan --type both --target https://github.com/user/repo.git --dast-url https://app.example.com
-AppSecAI.exe scan --type sca --target ./my-project
-AppSecAI.exe sca --trivy-report trivy_output.json --export-json --export-pdf
-AppSecAI.exe fix --input filtered_vulnerabilities.csv --create-prs
-AppSecAI.exe report --input results.json --format html,pdf
-AppSecAI.exe config --validate
-AppSecAI.exe config --init
-AppSecAI.exe config --show
-AppSecAI.exe config --setup
+python -m cli scan --type sast --target https://github.com/user/repo.git
+python -m cli scan --type dast --target https://example.com
+python -m cli scan --type both --target https://github.com/user/repo.git --dast-url https://app.example.com
+python -m cli scan --type sca --target ./my-project
+python -m cli sca --trivy-report trivy_output.json --export-json --export-pdf
+python -m cli fix --input filtered_vulnerabilities.csv --create-prs
+python -m cli report --input results.json --format html,pdf
+python -m cli config --validate
+python -m cli config --init
+python -m cli config --show
+python -m cli config --setup
 ```
 
 ---
@@ -155,7 +155,7 @@ If SonarQube is not reachable, AppSecAI falls back to a **mock SAST analysis** a
 
 | Requirement | Details |
 |---|---|
-| AppSecAI.exe | In a writable folder on your machine |
+| python -m cli | In a writable folder on your machine |
 | GitHub repository | Public or private repo to scan |
 | GitHub Personal Access Token | Required to clone repos and create PRs |
 | SonarQube instance | Local or remote — see Section 2.5 |
@@ -266,7 +266,7 @@ Results will appear in the SonarQube dashboard at `http://localhost:9000`.
 
 ### 2.7 Step 4 — Initial Setup Wizard (CazeAppSecAI CLI)
 
-Launch `AppSecAI.exe`. The banner and startup menu appear:
+Launch `python -m cli`. The banner and startup menu appear:
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
@@ -284,7 +284,7 @@ Select mode (1-4) [Default: 1]:
 
 #### Mode 1 — JSON Config File
 
-1. Open `appsec_config.json` (same folder as `AppSecAI.exe`) in any text editor
+1. Open `appsec_config.json` (same folder as `python -m cli`) in any text editor
 2. Fill in the SAST fields:
 
 ```json
@@ -302,7 +302,7 @@ Select mode (1-4) [Default: 1]:
 ```
 
 3. Save the file
-4. Launch `AppSecAI.exe`, press **Enter** (or type `1`) → the app loads your config and goes to the main menu:
+4. Launch `python -m cli`, press **Enter** (or type `1`) → the app loads your config and goes to the main menu:
 
 ```
 C:\...\CazeAppSecReport> Main Menu
@@ -516,7 +516,7 @@ Vulnerabilities scoring below this value are filtered out of reports.
 #### Via JSON Config Mode
 
 1. Ensure `appsec_config.json` has GitHub and SonarQube fields filled in
-2. Launch `AppSecAI.exe`, press Enter (Mode 1)
+2. Launch `python -m cli`, press Enter (Mode 1)
 3. From the Main Menu select **1. Run SAST Risk Analysis**
 4. The pipeline runs:
    - Clones your repository from GitHub
@@ -528,19 +528,19 @@ Vulnerabilities scoring below this value are filtered out of reports.
 
 #### Via Interactive CLI Mode
 
-1. Launch `AppSecAI.exe`, select Mode 2, complete the wizard
+1. Launch `python -m cli`, select Mode 2, complete the wizard
 2. From the scan menu select **1. Run SAST Risk Analysis**
 
 #### Via Direct CLI Command
 
 ```
-AppSecAI.exe scan --type sast --target https://github.com/username/repo.git
+python -m cli scan --type sast --target https://github.com/username/repo.git
 ```
 
 With options:
 
 ```
-AppSecAI.exe scan --type sast --target https://github.com/username/repo.git --branch develop --threshold 5 --export --output-dir my_results
+python -m cli scan --type sast --target https://github.com/username/repo.git --branch develop --threshold 5 --export --output-dir my_results
 ```
 
 **All `scan` flags for SAST:**
@@ -649,7 +649,7 @@ target URL. You only need to provide the URL of the running application.
 
 | Requirement | Details |
 |---|---|
-| AppSecAI.exe | In a writable folder on your machine |
+| python -m cli | In a writable folder on your machine |
 | Running web application | Accessible via a URL (http or https) |
 | Target URL | Full URL of the app to scan (e.g. `https://app.example.com`) |
 
@@ -698,11 +698,11 @@ To upload an existing ZAP HTML report instead of running a live scan, also set:
 }
 ```
 
-Save the file, launch `AppSecAI.exe`, press Enter (Mode 1).
+Save the file, launch `python -m cli`, press Enter (Mode 1).
 
 #### Mode 2 — Interactive CLI
 
-1. Launch `AppSecAI.exe`, select Mode 2, complete the initial wizard
+1. Launch `python -m cli`, select Mode 2, complete the initial wizard
 2. From the Advanced CLI Configuration Wizard select `2. DAST Configuration`:
 
 ```
@@ -822,7 +822,7 @@ C:\...\CazeAppSecReport> Main Menu > Settings Menu
 └─────────────────────────────────────────────────────────────┘
 ```
 
-Select `5`. The `.env` file is written next to `AppSecAI.exe` and loaded automatically on next launch.
+Select `5`. The `.env` file is written next to `python -m cli` and loaded automatically on next launch.
 
 **Configuration priority (highest to lowest):**
 
@@ -838,7 +838,7 @@ Select `5`. The `.env` file is written next to `AppSecAI.exe` and loaded automat
 #### Via JSON Config Mode
 
 1. Set `dast_url` in `appsec_config.json`
-2. Launch `AppSecAI.exe`, press Enter (Mode 1)
+2. Launch `python -m cli`, press Enter (Mode 1)
 3. From the Main Menu select **2. Run DAST Risk Analysis**
 4. The pipeline runs:
    - Launches the bundled OWASP ZAP 2.16.1 in headless mode
@@ -852,25 +852,25 @@ Select `5`. The `.env` file is written next to `AppSecAI.exe` and loaded automat
 
 #### Via Interactive CLI Mode
 
-1. Launch `AppSecAI.exe`, select Mode 2, complete the wizard with DAST URL configured
+1. Launch `python -m cli`, select Mode 2, complete the wizard with DAST URL configured
 2. From the scan menu select **2. Run DAST Risk Analysis**
 
 #### Via Direct CLI Command
 
 ```
-AppSecAI.exe scan --type dast --target https://your-target-app.com
+python -m cli scan --type dast --target https://your-target-app.com
 ```
 
 With options:
 
 ```
-AppSecAI.exe scan --type dast --target https://your-target-app.com --threshold 3 --timeout 1800 --export --output-dir dast_results
+python -m cli scan --type dast --target https://your-target-app.com --threshold 3 --timeout 1800 --export --output-dir dast_results
 ```
 
 **Combined SAST + DAST scan:**
 
 ```
-AppSecAI.exe scan --type both --target https://github.com/username/repo.git --dast-url https://your-target-app.com
+python -m cli scan --type both --target https://github.com/username/repo.git --dast-url https://your-target-app.com
 ```
 
 **All `scan` flags for DAST:**
@@ -943,7 +943,7 @@ SCA (Software Composition Analysis) identifies known vulnerabilities in third-pa
 
 | Requirement | Details |
 |---|---|
-| AppSecAI.exe | In a writable folder |
+| python -m cli | In a writable folder |
 | Project to scan | Local directory, container image, or repository |
 | Internet access | For Trivy to download vulnerability databases |
 
@@ -1120,7 +1120,7 @@ All changes to `appsec_config.json` are saved when you save the file. The app re
 
 Settings entered interactively are stored as environment variables for the current session. To persist them:
 
-From the Settings Menu, select `5` (Save Configuration to .env). The `.env` file is created next to `AppSecAI.exe` and loaded automatically on next launch.
+From the Settings Menu, select `5` (Save Configuration to .env). The `.env` file is created next to `python -m cli` and loaded automatically on next launch.
 
 Alternatively, manually edit `appsec_config.json` to persist SCA context settings. The JSON config takes priority over the `.env` file.
 
@@ -1131,7 +1131,7 @@ Alternatively, manually edit `appsec_config.json` to persist SCA context setting
 #### Via JSON Config Mode
 
 1. Ensure `appsec_config.json` has `sca_target_type` and `sca_target_path` set (or configure via the interactive menu)
-2. Launch `AppSecAI.exe`, press Enter (Mode 1)
+2. Launch `python -m cli`, press Enter (Mode 1)
 3. From the Main Menu select **3. Run SCA Risk Analysis**
 4. AppSecAI processes the scan:
    - Runs Trivy internally against your target
@@ -1144,19 +1144,19 @@ Alternatively, manually edit `appsec_config.json` to persist SCA context setting
 
 #### Via Interactive CLI Mode
 
-1. Launch `AppSecAI.exe`, select Mode 2, complete the wizard
+1. Launch `python -m cli`, select Mode 2, complete the wizard
 2. From the scan menu select **3. Run SCA Risk Analysis**
 
 #### Via Direct CLI Command (scan subcommand)
 
 ```
-AppSecAI.exe scan --type sca --target ./my-project
+python -m cli scan --type sca --target ./my-project
 ```
 
 With options:
 
 ```
-AppSecAI.exe scan --type sca --target ./my-project --target-type fs --threshold 3 --export --output-dir sca_results
+python -m cli scan --type sca --target ./my-project --target-type fs --threshold 3 --export --output-dir sca_results
 ```
 
 **All `scan --type sca` flags:**
@@ -1175,13 +1175,13 @@ AppSecAI.exe scan --type sca --target ./my-project --target-type fs --threshold 
 If you already have a Trivy JSON report, use the `sca` subcommand directly:
 
 ```
-AppSecAI.exe sca --trivy-report trivy_report.json
+python -m cli sca --trivy-report trivy_report.json
 ```
 
 With export options:
 
 ```
-AppSecAI.exe sca --trivy-report trivy_report.json --threshold 3 --output-dir sca_results --export-json --export-pdf
+python -m cli sca --trivy-report trivy_report.json --threshold 3 --output-dir sca_results --export-json --export-pdf
 ```
 
 **All `sca` subcommand flags:**
